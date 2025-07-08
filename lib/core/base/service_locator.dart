@@ -3,7 +3,7 @@ import 'package:e_commerce_cart_system/features/home/data/mockup/mockup_products
 import 'package:e_commerce_cart_system/features/home/data/mockup/mockup_fixed_products.dart';
 import 'package:e_commerce_cart_system/features/splash/data/datasources/local_datasource.dart';
 import 'package:get_it/get_it.dart';
-import '../../features/cart/application/cart_service/cart_service.dart';
+import '../../features/cart/application/cart_service/cart_service_impl.dart';
 import '../../features/cart/data/datasources/local_cart_data_source.dart';
 import '../../features/cart/domain/repositories/cart_repo.dart';
 import '../../features/cart/domain/usecases/load_cart_item_usecase.dart';

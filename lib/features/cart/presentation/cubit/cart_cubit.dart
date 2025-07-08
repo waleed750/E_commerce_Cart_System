@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_cart_system/core/core_export.dart';
-import '../../application/cart_service/cart_service.dart';
+import '../../application/cart_service/cart_service_impl.dart';
 import '../../application/discount_strategy/discount_strategy.dart';
 import '../../data/models/product_model.dart';
 import '../../domain/usecases/load_cart_item_usecase.dart';

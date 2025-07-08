@@ -23,4 +23,7 @@ class FixedDiscountStrategy extends DiscountStrategy {
   String toString() {
     return "$_amount\$";
   }
+
+  @override
+  List<Object?> get props => [_promoCode];
 }

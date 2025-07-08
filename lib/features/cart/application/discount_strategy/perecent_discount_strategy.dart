@@ -20,4 +20,9 @@ class PerecentDiscountStrategy extends DiscountStrategy {
   String toString() {
     return "$_percent%";
   }
+
+  @override
+  List<Object?> get props => [
+        promoCode,
+      ];
 }
