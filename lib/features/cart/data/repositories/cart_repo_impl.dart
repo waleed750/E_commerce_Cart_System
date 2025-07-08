@@ -7,7 +7,9 @@ import '../../../../core/base/service_locator.dart';
 import '../datasources/local_cart_data_source.dart';
 
 class CartRepoImpl implements CartRepo {
-  final localDataSource = serviceLocator<LocalCartDataSource>();
+  final LocalCartDataSource localDataSource;
+
+  CartRepoImpl({required this.localDataSource});
 
   @override
   Future<Either<Failure, List<ProductModel>>> loadCart() async {

@@ -20,20 +20,27 @@ Future<void> initServiceLocator() async {
 
   //! ############################### Service ###############################
   Bloc.observer = AppBlocObserver();
-  serviceLocator.registerSingleton(
-    () => AppPreferences()..init(),
+  serviceLocator.registerSingleton<AppPreferences>(
+    AppPreferences()..init(),
   );
   //! ################################ Datasources #################################
   serviceLocator.registerLazySingleton<SplashLocalDatasource>(
     () => SplashLocalDatasourceImpl(serviceLocator<AppPreferences>()),
   );
   serviceLocator.registerLazySingleton<LocalCartDataSource>(
-    () => LocalCartDataSourceImpl(),
+    () => LocalCartDataSourceImpl(serviceLocator<AppPreferences>()),
   );
+  //! ############################### Services && Applications ###############################
+  serviceLocator.registerLazySingleton<CartService>(() => CartService());
+  //! ############################### Mockups ###############################
+  serviceLocator.registerLazySingleton<MockupProducts>(
+      () => serviceLocator<MockupFixedProducts>());
+
   //! ################################# Repository #################################
 
   serviceLocator.registerLazySingleton<SplashRepo>(() => SplashRepoImpl());
-  serviceLocator.registerLazySingleton<CartRepo>(() => CartRepoImpl());
+  serviceLocator.registerLazySingleton<CartRepo>(() =>
+      CartRepoImpl(localDataSource: serviceLocator<LocalCartDataSource>()));
   //! ################################# Usecases #################################
 
   serviceLocator.registerLazySingleton(() => SplashUsecase());
@@ -48,9 +55,4 @@ Future<void> initServiceLocator() async {
       saveCartUsecase: serviceLocator<SaveCartItemUsecase>()));
   serviceLocator
       .registerFactory(() => HomeCubit(mockupProducts: MockupFixedProducts()));
-  //! ############################### Services && Applications ###############################
-  serviceLocator.registerLazySingleton<CartService>(() => CartService());
-  //! ############################### Mockups ###############################
-  serviceLocator.registerLazySingleton<MockupProducts>(
-      () => serviceLocator<MockupFixedProducts>());
 }

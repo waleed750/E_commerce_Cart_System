@@ -8,7 +8,9 @@ abstract class LocalCartDataSource {
 }
 
 class LocalCartDataSourceImpl implements LocalCartDataSource {
-  final appPrefs = serviceLocator<AppPreferences>();
+  final AppPreferences appPrefs;
+
+  LocalCartDataSourceImpl(this.appPrefs);
   @override
   Future<void> saveCart(List<ProductModel> products) async {
     await appPrefs.setCart(products);

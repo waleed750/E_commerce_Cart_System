@@ -49,8 +49,12 @@ class CartService {
   // Cart Items
 
   void addItemToCart(ProductModel product) {
-    cartItems.add(product);
-    _cachedTotal += product.price; // only add price, quantity is 1
+    final index = cartItems.indexWhere((item) => item.id == product.id);
+    //Avoid Duplication
+    if (index == -1) {
+      cartItems.add(product);
+      _cachedTotal += product.price;
+    }
   }
 
   ProductModel? removeItemFromCart(int id) {
